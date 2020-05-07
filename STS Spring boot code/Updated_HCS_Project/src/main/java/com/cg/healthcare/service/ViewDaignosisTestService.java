@@ -23,5 +23,4 @@ public interface ViewDaignosisTestService {
 	
 	public List<DiagnosisTest> searchTestsForDiagnosisCentre(String searchTest)throws SearchTestException;
 	
-	public List<Appointment> viewAppointments(LocalDate appDate, String centreId, String testID)throws AppointmentException;
 }

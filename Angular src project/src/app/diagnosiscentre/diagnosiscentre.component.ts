@@ -15,6 +15,7 @@ export class DiagnosiscentreComponent implements OnInit {
   msg1:string;
   errorMsg:string;
   errorMsg1:string;
+  errorMsg2:string;
   addCentreFlag:boolean=false;
   newFlag:boolean=false;
   viewCentreFlag=false;
@@ -60,7 +61,7 @@ viewCentres(){
                                                        this.viewCentreFlag=true;
                                                        this.editFlag=false;},
                                                 error=>{ console.log(error);
-                                                  this.errorMsg=error.error.message;});
+                                                  this.errorMsg2=error.error.message;});
                                                 this.newFlag = true;
 }
 showEditForm(centre : Diagnosiscentre){

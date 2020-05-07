@@ -18,7 +18,6 @@ public interface AppointmentService {
 	
 	String makeAppointment(AppointmentForm appointmentForm)throws SlotException;
 	boolean removeAppointment(String apmtID) throws AppointmentException;
-	public List<Appointment> viewAppointments(LocalDate appDate, String centreId, String testID) throws AppointmentException;
 	public List<Appointment> viewUserAppointments(String contactNo) throws AppointmentException;
 	public List<Appointment> viewAdmnAppointments(String slotId) throws AppointmentException;
 	

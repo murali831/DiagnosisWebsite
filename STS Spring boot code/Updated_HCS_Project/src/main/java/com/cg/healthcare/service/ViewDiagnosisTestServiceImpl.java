@@ -21,7 +21,12 @@ public class ViewDiagnosisTestServiceImpl implements ViewDaignosisTestService{
 
 	@Autowired
 	IHealthCareDao dao;
-	
+	/*
+	 * Description:    The method  mentioned below gets the centers in which that test id test available. 
+	 * Method:         getDiagnosisCentreForTests() - we'll get list of centers in a list and display to user
+	 * Exceptions      If passed test is not available then it pops centers not available exception.  
+	 * @return type is list 
+	 */
 	@Override
 	public List<DiagnosisTest> getDiagnosisCentreForTests(String testID) throws DiagnosisException {
 		List<DiagnosisTest> dlist= dao.getDiagnosisCentreForTests(testID);
@@ -30,7 +35,12 @@ public class ViewDiagnosisTestServiceImpl implements ViewDaignosisTestService{
 		dlist.sort((d1,d2)-> d1.getDiagnosisCentre().getCentreId().compareTo(d2.getDiagnosisCentre().getCentreId()));
 		return dlist;
 	}
-
+	/*
+	 * Description:    The method  mentioned below gets the tests in which that center id center available. 
+	 * Method:         viewTestsForDiagnosisCentre() - we'll get list of test in a list and display to user
+	 * Exceptions      If passed test is not available then it pops tests not available exception.  
+	 * @return type is List
+	 */
 	@Override
 	public List<DiagnosisTest> viewTestsForDiagnosisCentre(String diagnosisCentreId) throws DiagnosisException {
 		List<DiagnosisTest> dlist= dao.viewTestsForDiagnosisCentre(diagnosisCentreId);
@@ -39,15 +49,12 @@ public class ViewDiagnosisTestServiceImpl implements ViewDaignosisTestService{
 		dlist.sort((d1,d2)-> d1.getCheckup().getTestId().compareTo(d2.getCheckup().getTestId()));
 		return dlist;
 	}
-
-	@Override
-	public List<Appointment> viewAppointments(LocalDate appDate, String centreId, String testID) throws AppointmentException {
-		List<Appointment> lst =  dao.viewAppointments(appDate, centreId, testID);
-		if(lst.isEmpty())
-			throw new AppointmentException(HealthCareConstants.NO_APPOINTMENTS);
-		return lst;
-	}
-
+	/*
+	 * Description:    The method  mentioned below search the test name entered by user and shows the tests in which that testname/ test id available. 
+	 * Method:         searchTestsForDiagnosisCentre() - we'll get list of centers in a list and display to user
+	 * Exceptions      If passed testname/ id  is not available then it pops tests not available exception.  
+	 * @return type is list
+	 */
 	@Override
 	public List<DiagnosisTest> searchTestsForDiagnosisCentre(String searchTest) throws SearchTestException {
 		List<DiagnosisTest> dlist = dao.searchDiagnosisCentreForTests(searchTest);

@@ -49,14 +49,6 @@ public class AppointmentRestController {
 		return new HealthMessage(HealthCareConstants.APPOINTMENT_REMOVED);
 		
 	}
-	
-	@CrossOrigin
-	@GetMapping("/viewAppointments/{appdt}/{centreid}/{testid}")
-	public List<Appointment> viewAppointments(@PathVariable("appdt") @DateTimeFormat(pattern="yyyy-M-d")LocalDate appDate, 
-			@PathVariable("centreid") String centreId, @PathVariable("testid") String testID) throws AppointmentException {
-		return service.viewAppointments(appDate, centreId, testID);
-	}
-	
 	@CrossOrigin
 	@GetMapping("/viewUserAppointments/{contactno}")
 	public List<Appointment> viewUserAppointments(@PathVariable("contactno")  String contactNo) throws AppointmentException {

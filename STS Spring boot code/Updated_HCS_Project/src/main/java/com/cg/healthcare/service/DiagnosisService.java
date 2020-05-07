@@ -13,6 +13,6 @@ public interface DiagnosisService {
 	public boolean addDiagnosisCentre(DiagnosisCentre centre);
 	public boolean editDiagnosisCentre(DiagnosisCentre centre);
 	public List<DiagnosisCentre> viewDiagmosisCentre() throws DiagnosisException;
-	public DiagnosisCentre viewDiagnosisCentre(String centreId) throws DiagnosisException;
+	//public DiagnosisCentre viewDiagnosisCentre(String centreId) throws DiagnosisException;
 	public List<CheckUp> viewCheckUp() throws DiagnosisException;
 }

@@ -15,14 +15,15 @@ export class ViewuserappointmentComponent implements OnInit {
    showflag=true;
    @ViewChild("contactfrm")
   form:NgForm;
+  UserName: string;
 
  constructor(private diagnosisService:DiagnosisService) {}
   patientName:string;
 ngOnInit(){
        let token = localStorage.getItem('token');
                 if(token != null){
-                       let patientName = this.diagnosisService.decrypt(token.split("-")[0]);
-                       this.patientName= patientName;
+                       let userName = this.diagnosisService.decrypt(token.split("-")[0]);
+                       this.UserName= userName;
                }
 
         

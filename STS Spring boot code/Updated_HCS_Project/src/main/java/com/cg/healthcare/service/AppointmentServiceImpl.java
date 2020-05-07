@@ -24,6 +24,13 @@ public class AppointmentServiceImpl implements AppointmentService {
 	private IHealthCareDao dao;
 
 	@Transactional(propagation = Propagation.REQUIRES_NEW)
+	/*
+	 * Description:    The method  mentioned below adds the appointment to the appointment DB.
+	 * Method:         makeAppointment() - Here we are creating instance of appointment by which we can check whether slots available and check count of appointments done to that particular slot
+	 *                 and generate appid based on year, month, day, minute, slot id value                                       
+	 * Exceptions      SlotException if no slots are available we display no slots available and if the max appointment are booked then we show no appointments available  
+	 * @return type is String 
+	 */
 	@Override
 	public String makeAppointment(AppointmentForm appointmentForm) throws SlotException {
 		Appointment appointment = new Appointment();
@@ -44,7 +51,13 @@ public class AppointmentServiceImpl implements AppointmentService {
 		dao.makeAppointment(appointment);
 		return ID;
 	}
-
+	/*
+	 * Description:    The method  mentioned below removes the appointment from the appointment DB.
+	 * Method:         removeAppointment() - Here we are creating instance of appointment by which we can check whether appointment available and remove it based on condition  
+	 *                 if it is only after the present date then only we can remove the appointment                                
+	 * Exceptions      AppointmentException if we try to cancel the appointments that is before date then it pops exception that appointment not cancelled.
+	 * @return type is boolean 
+	 */
 	@Override
 	public boolean removeAppointment(String apmtID) throws AppointmentException {
 		Appointment apmt = dao.viewAppointment(apmtID);
@@ -58,15 +71,12 @@ public class AppointmentServiceImpl implements AppointmentService {
 		return true;
 		
 	}
-
-	@Override
-	public List<Appointment> viewAppointments(LocalDate appDate, String centreId, String testID) throws AppointmentException {
-		List<Appointment> lst =  dao.viewAppointments(appDate, centreId, testID);
-		if(lst.isEmpty())
-			throw new AppointmentException(HealthCareConstants.NO_APPOINTMENTS);
-		return lst;
-	}
-	
+	/*
+	 * Description:    The method  mentioned below used to get the list of appointment that user can see from the appointment DBbooked for that particular slot.
+	 * Method:         viewAdmnAppointments() - Here we are creating instance of appointment getting the all appointments avaible for that slot id                                               
+	 * Exceptions      AppointmentException if there are no appointments available list is empty and then it pops exception that appointment no appointment available.
+	 * @return type is List 
+	 */
 	@Override
 	public List<Appointment> viewAdmnAppointments(String slotId) throws AppointmentException {
 		List<Appointment> lst =  dao.viewAppointments(slotId);
@@ -75,6 +85,12 @@ public class AppointmentServiceImpl implements AppointmentService {
 		lst.sort((a1,a2)->a1.getPatientName().compareTo(a2.getPatientName()));
 		return lst;
 	}
+	/*
+	 * Description:    The method  mentioned below used to get the list of appointment that Admin can see from the appointment DBbooked for that particular slot.
+	 * Method:         viewUserAppointments() - Here we are creating instance of appointment getting the all appointments available by contact key                                                
+	 * Exceptions      AppointmentException if there are no appointments available list is empty and then it pops exception that appointment no appointment available.
+	 * @return type is List 
+	 */
 	@Override
 	public List<Appointment> viewUserAppointments(String contactNo) throws AppointmentException {
 		List<Appointment> lst =  dao.viewUserAppointments(contactNo);

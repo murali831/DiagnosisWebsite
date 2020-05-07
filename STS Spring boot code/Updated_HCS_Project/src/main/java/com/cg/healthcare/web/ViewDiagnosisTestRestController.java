@@ -47,10 +47,4 @@ public class ViewDiagnosisTestRestController {
 		return lst;
 		
 	}
-	@CrossOrigin
-	@GetMapping("/ViewAppointmnets/{appdt}/{centreid}/{testid}")
-	public List<Appointment> viewAppointments(@PathVariable("appdt") @DateTimeFormat(pattern="yyyy-M-d")LocalDate appDate, 
-			@PathVariable("centreid") String centreId, @PathVariable("testid") String testID) throws AppointmentException {
-		return service.viewAppointments(appDate, centreId, testID);
-	}
 }
