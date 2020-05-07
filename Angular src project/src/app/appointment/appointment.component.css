@@ -1,0 +1,28 @@
+
+/*......portfolio*/
+.portfolio img {
+    max-width: 100%;
+    transition: transform .5s ease;
+}
+.row.no-padding [class*=col-] {
+    padding: 0;
+}
+.portfolio img:hover {
+    transform: scale(1.1);
+    cursor: zoom-in;
+}
+.portfolio {
+    overflow: hidden;
+}
+
+.social img{
+    height: 80px;
+    width: 80px;
+    margin-right:10px;
+}
+hr.light{
+    border-top: 1px solid #1b1a1a;
+    width: 75%;
+    margin-top: .8rem;
+    margin-bottom: 1rem;
+}

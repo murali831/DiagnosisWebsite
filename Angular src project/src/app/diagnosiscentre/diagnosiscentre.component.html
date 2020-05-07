@@ -1,0 +1,169 @@
+<section style="min-height: 600px;">
+  <section class="p-4 row ">
+  
+  <div class="p-2" ><a class="btn btn-info text-white" (click)= "viewCentres()">View Diagnosis Centres</a></div> 
+  <div class="p-2" *ngIf="adminFlag"><a class="btn btn-info text-white" (click)= "showAddCentreForm() ">Add Diagnosis Centre</a></div>
+</section> 
+  <section *ngIf="!newFlag">
+  <div class="p-2">
+  <h4 class="text-center">Welcome to Healthcare Management Service.</h4>
+  <hr>
+  <img src="../assets/bgimages/welcomepg.jpg" style="background-size:cover;
+                                        background-position: center;
+                                        border-spacing: 5px;
+                                        height:60vh;
+                                        width: 95%;">
+</div >
+  <div class="p-2">
+   <p class="lead">From analysis to result. From science to sensitivity.</p>
+
+    <p>High quality diagnostics are an imperative for better treatment and patient care. Our Hospitals Group are India’s leading healthcare system, has thus far been delivering 3.5 million high-quality diagnostic tests every year, through its Hospitals and Clinics earning an ‘excellent’ rating from 95% of its patients.</p>
+      
+    <p>These Centres are the result of the ‘good health for all’ mission that is spurring the Apollo Hospitals Group to touch a billion lives. Following the corporate credo of bringing quality, affordable healthcare closer to the consumer, 2015 saw 100+ Diagnostics centres, in 2016 it has been grown to 150+ centres and 2017 landed with 250 + collection centres , 70+ Labs springing up in neighbourhoods across India, delivering expertise that is empowering to doctors and patients alike.</p>
+      
+    <p>Our Diagnostics’ expert technicians and state-of-the-art diagnostic equipment are constantly guided by all HCS’s 36-years legacy of excellence to ensure the accuracy and timeliness of test results.<p>
+    </div>
+  </section>
+
+  <section class="col-md-4 mx-auto" *ngIf="addCentreFlag">
+    <h2 class="text-center">Add Diagnosis Centre</h2>
+   
+   <div class="alert alert-success" *ngIf="msg != undefined">{{msg}}</div>
+    <div class="alert alert-danger" *ngIf="errorMsg != undefined">{{errorMsg}}</div>
+  
+  <form #centrefrm="ngForm" (ngSubmit)="addCentre()" novalidate>
+    <div>Centre ID</div>
+    <div><input type="text" name="cid" [(ngModel)]="centre.centreId"  #modelcid="ngModel" class="form-control" required pattern="[a-zA-Z]{3}[0-9]{4}"></div>
+    <div *ngIf="modelcid.errors && (modelcid.dirty || modelcid.touched)" class="alert alert-danger">
+      <div [hidden]="!modelcid.errors.required">Centre ID is required</div>
+      <div [hidden]="!modelcid.errors.pattern">First Three Character should be alphabet and rest 4 numbers</div>
+    </div>
+
+    <div>Centre Name</div>
+    <div><input type="text" name="cname" [(ngModel)]="centre.centreName"  #mlcname="ngModel" class="form-control"required pattern="[a-zA-Z\s]{3,24}"/></div>
+    <div *ngIf="mlcname.errors && (mlcname.dirty || mlcname.touched)" class="alert alert-danger">
+      <div *ngIf="mlcname.errors.required">
+        Centre Name is required
+      </div>
+      <div *ngIf="mlcname.errors.pattern">
+        Centre Name must not exceed more than 25 characters and min 3 characters
+    </div>
+    </div>
+  
+    <div>Address</div>
+    <div><input type="text" name="addr" [(ngModel)]="centre.address" #mladdr="ngModel" class="form-control" required pattern="[a-zA-Z0-9\s]{3,24}"/></div>
+    <div class="alert alert-danger" *ngIf="mladdr.invalid && mladdr.touched">
+    <div *ngIf="mladdr.errors.required"> Address is required</div>
+    <div *ngIf="mladdr.errors.pattern">Address must not exceed more than 25 characters and min 3 characters</div>
+  </div>
+
+  <div>Area</div>
+    <div><input type="text" name="area" [(ngModel)]="centre.area"  #mlarea="ngModel" class="form-control" required pattern="[a-zA-Z\s]{3,24}"/></div>
+    <div class="alert alert-danger" *ngIf="mlarea.invalid && mlarea.touched">
+    <div *ngIf="mlarea.errors.required"> Area is required</div>
+    <div *ngIf="mlarea.errors.pattern">Area must not exceed more than 25 characters and min 3 characters not numbers</div>
+  </div>
+
+  <div>City</div>
+    <div><input type="text" name="cty" [(ngModel)]="centre.city"  #mlcty="ngModel" class="form-control" required pattern="[a-zA-Z]{3,24}"/></div>
+    <div class="alert alert-danger" *ngIf="mlcty.invalid && mlcty.touched">
+      <div *ngIf="mlcty.errors.required"> City is required</div>
+      <div *ngIf="mlcty.errors.pattern">City must not exceed more than 25 characters and min 3 characters not numbers</div>
+    </div>
+  
+    <div>Contact</div>
+    <div><input type="number" name="cnt" [(ngModel)]="centre.contact" #mlcnt="ngModel" class="form-control" required pattern="[0-9]{10}"/></div>
+    <div *ngIf="mlcnt.errors && (mlcnt.dirty || mlcnt.touched)" class="alert alert-danger">
+      <div [hidden]="!mlcnt.errors.required">
+          Contact is required
+      </div>
+      <div [hidden]="!mlcnt.errors.pattern">
+        Contact should be 10 digits
+    </div>
+    </div>
+  
+    <div class="mt-2 text-center"><input type="submit" value="Add Diagnosis Centre" [disabled]="!centrefrm.form.valid" class="btn btn-danger"/>
+    </div>
+  </form>
+  </section>
+
+<section class="col-md-12 mx-auto" *ngIf="viewCentreFlag">
+  <h2 class="text-center">Diagnosis Centres</h2>
+  <hr>
+  <div class="alert alert-danger" *ngIf="errorMsg != undefined">{{errorMsg}}</div>
+  <table class="table table-primary table-striped table-hover col-md-12 mx-auto p-1" >
+  <tr>
+      <th>Image</th>
+      <th>Centre ID</th>
+      <th>Centre Name</th>
+      <th>Address</th>
+      <th>Area</th>
+      <th>City</th>
+      <th>Contact</th>
+      <th *ngIf="adminFlag">Edit</th>
+      <th style="width: 10%;">Tests</th>
+      
+
+  </tr>
+  <tr *ngFor ="let c of centres">
+    <td><img src="assets/images/{{c.centreId}}.jpg" height="200" width="250"/></td>
+    <td>{{c.centreId}}</td>
+    <td>{{c.centreName | titlecase}}</td>
+    <td>{{c.address }}</td>
+    <td>{{c.area }}</td>
+     <td>{{c.city }}</td>
+     <td>{{c.contact}}</td>
+     <td *ngIf="adminFlag"><a class="btn btn-primary" (click)="showEditForm(c)" >Edit</a></td>
+<td><a class="btn btn-primary" routerLink="/viewtests/{{c.centreId}}" >View Tests</a></td>
+  </tr>
+</table>
+</section>
+
+<section class="col-md-4 mx-auto" *ngIf="editFlag">
+  <h2 class="text-center">Edit Diagnosis Centre</h2>
+ 
+ <div class="alert alert-success" *ngIf="msg1 != undefined">{{msg}}</div>
+  <div class="alert alert-danger" *ngIf="errorMsg1 != undefined">{{errorMsg}}</div>
+
+  <form #centrefrm="ngForm" (ngSubmit)="editCentre()">
+    <div>Centre ID</div>
+    <div><input type="text" name="cid" readonly [(ngModel)]="centre.centreId" required #modelcid="ngModel" class="form-control"></div>
+    
+    <div>Centre Name</div>
+    <div><input type="text" name="cname" [(ngModel)]="centre.centreName" #mlcname="ngModel" class="form-control" required pattern="[a-zA-Z\s]{3,24}"/></div>
+    <div *ngIf="mlcname.errors && (mlcname.dirty || mlcname.touched)" class="alert alert-danger">
+      <div *ngIf="mlcname.errors.required">Centre Name is required</div>
+      <div *ngIf="mlcname.errors.pattern">Centre Name must not exceed more than 25 characters and min 3 characters</div>
+    </div>
+    <div>Address</div>
+    <div><input type="text" name="addr" [(ngModel)]="centre.address" #mladdr="ngModel" class="form-control" required pattern="[a-zA-Z0-9\s]{3,24}"/></div>
+    <div class="alert alert-danger" *ngIf="mladdr.invalid && mladdr.touched">
+      <div *ngIf="mladdr.errors.required"> Address is required</div>
+      <div *ngIf="mladdr.errors.pattern">Address must not exceed more than 25 characters and min 3 characters</div>
+    </div>
+  <div>Area</div>
+    <div><input type="text" name="area" [(ngModel)]="centre.area" #mlarea="ngModel" class="form-control" required pattern="[a-zA-Z\s]{3,24}"/></div>
+    <div class="alert alert-danger" *ngIf="mlarea.invalid && mlarea.touched">
+      <div *ngIf="mlarea.errors.required"> Area is required</div>
+      <div *ngIf="mlarea.errors.pattern">Area must not exceed more than 25 characters and min 3 characters no numbers </div>
+    </div>
+  <div>City</div>
+    <div><input type="text" name="cty" [(ngModel)]="centre.city" #mlcty="ngModel" class="form-control" required pattern="[a-zA-Z]{3,24}"/></div>
+    <div class="alert alert-danger" *ngIf="mlcty.invalid && mlcty.touched">
+      <div *ngIf="mlcty.errors.required"> City is required</div>
+      <div *ngIf="mlcty.errors.pattern">City must not exceed more than 25 characters and min 3 characters not numbers and spaces</div>
+    </div>
+  <div>Contact</div>
+    <div><input type="text" name="cnt" [(ngModel)]="centre.contact"  #mlcnt="ngModel" class="form-control" required pattern="[0-9]{10}"/></div>
+    <div *ngIf="mlcnt.errors && (mlcnt.dirty || mlcnt.touched)" class="alert alert-danger">
+      <div [hidden]="!mlcnt.errors.required">Contact is required</div>
+      <div [hidden]="!mlcnt.errors.pattern">Contact should be 10 digits</div>
+    </div>
+    <div class="mt-2 text-center"><input type="submit" value="Edit Diagnosis Centre" [disabled]="!centrefrm.form.valid" class="btn btn-danger"/>
+    </div>
+</form>
+</section>
+
+</section>
+
+

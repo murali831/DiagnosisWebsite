@@ -1,0 +1,36 @@
+<section class=" col-md-12 mt-3">
+  <h2 class="text-center">Diagnosis Centres</h2>
+  <div class="btn btn-info col-md-12 text-center">
+       <div>Test ID : {{test.testId}}</div>
+       <div>Test Name : {{test.testName}}</div>
+    </div>
+  <hr>
+  <table class="table table-primary table-striped table-hover col-md-11 mx-auto" >
+  <tr>
+      <th>Image</th>
+      <th>Centre ID</th>
+      <th>Centre Name</th>
+      <th>Address</th>
+      <th>Area</th>
+      <th>City</th>
+      <th>Contact</th>
+      <th style="width: 10%;">Slots</th>
+      <th style="width: 10%;" *ngIf="adminFlag">Edit</th>
+      
+  </tr>
+  <tr *ngFor ="let c of centres">
+    <td><img src="assets/images1/{{c.diagnosisCentre.centreId}}.jpg" height="200" width="250"/></td>
+    <td>{{c.diagnosisCentre.centreId}}</td>
+    <td>{{c.diagnosisCentre.centreName | titlecase}}</td>
+    <td>{{c.diagnosisCentre.address }}</td>
+    <td>{{c.diagnosisCentre.area }}</td>
+     <td>{{c.diagnosisCentre.city }}</td>
+     <td>{{c.diagnosisCentre.contact}}</td>
+<td><a class="btn btn-primary" routerLink="/viewslots/{{test.testId}}/{{c.diagnosisCentre.centreId}}" >view Slots</a></td>
+    
+<td *ngIf="adminFlag"><a class="btn btn-primary" routerLink="/addslot/{{c.diagnosisTestId}}" >Add Slot</a></td>
+
+  </tr>
+</table>
+</section>
+

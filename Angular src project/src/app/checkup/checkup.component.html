@@ -1,0 +1,63 @@
+<section style ="min-height: 650px;">
+<section class="p-4 row -7">
+  <div class="p-2"><a class="btn btn-info" routerLink="/search/testName">Search Test</a></div>
+  <div class="p-2"><a class="btn btn-info text-white" (click)="viewTest()">View Tests</a></div>
+  <div class="p-2" *ngIf="adminFlag"><a class="btn btn-info" routerLink="/addtestforcentre">Add Test</a></div>
+</section>
+<section *ngIf="!newFlag">
+<div class="p-2">
+<h2>Home diagnosis Testing kits :</h2>
+<hr>
+</div>
+<div class="container">
+  <div class="row " >
+    <div class="col-md-4">
+      <img src="../assets/bgimages/bg1.jpg" style="background-size:cover;
+                                        background-position: center;
+                                        border-spacing: 5px;
+                                        height:50vh;
+                                        width: 105%;">
+      <h5>Blood Pressure Machine</h5>
+      <p>Right Cuff size based on arm, Easy to read number, Digital Monitor</p>
+    </div>
+    <div class="col-md-4" >
+      <img src="../assets/bgimages/bg2.jpeg" style="background-size:cover;
+                                        background-position: center;
+                                        border-spacing: 5px;
+                                        height:50vh;
+                                        width: 105%;">
+      <h5>ECG Machine</h5>
+      <p>portable and compact in size and are useful for evaluation outside a clinical setting.</p>
+    </div>
+    <div class="col-md-4" >
+      <img src="../assets/bgimages/bg3.jpg" style="background-size:cover;
+                                        background-position: center;
+                                        border-spacing: 5px;
+                                        height:50vh;
+                                        width: 105%;">
+       <h5>Sugar Testing Machine</h5>
+       <p>Gives an accurate reading.90 days test result storage,Very fast and most popular glucose meter.</p>
+    </div>
+  </div>
+</div>
+</section>
+<section class="col-md-12 mx-auto" *ngIf="viewTestFlag">
+  <h2 class="text-center">Diagnosis Tests</h2>
+  <table class="table table-primary table-striped table-hover col-md-10 mx-auto mt-3">
+      <tr>
+          <th>Image</th>
+          <th>Test ID</th>
+          <th>Test Name</th>
+          <th>Amount</th>
+          <th>Centres</th>
+      </tr>
+      <tr *ngFor="let t of tests">
+          <td><img src="assets/img/{{t.testId}}.jpg" height="200" width="250" /></td>
+          <td>{{t.testId}}</td>
+          <td>{{t.testName | titlecase}}</td>
+          <td>{{t.amount |  currency:'INR'}}</td>
+          <td><a class="btn btn-primary" routerLink="/viewdiagnosis/{{t.testId}}">View Centers</a></td>
+      </tr>
+  </table>
+</section>
+</section>

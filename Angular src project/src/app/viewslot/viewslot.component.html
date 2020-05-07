@@ -1,0 +1,20 @@
+<section class="col-12 mt-4 " style="min-height: 400px;">
+    <h2 class="col-md-8 mx-auto p-3 ">Available Slots</h2>
+<table class="table table-primary table-striped table-hover col-md-8 mx-auto mt-6">
+    <tr>
+        <th>Slot ID</th>
+        <th>Date</th>
+        <th>No Of Appointments</th>
+        <th>Appointment</th>
+        <th *ngIf="adminFlag">Total Appointments</th>
+
+    </tr>
+    <tr *ngFor="let s of slots">
+        <td>{{s.testSlotId}}</td>
+        <td>{{s.slotDate | date }}</td>
+        <td>{{s.numOfApp }}</td>
+        <td><a class="btn btn-primary" routerLink="/makeappointment/{{s.testSlotId}}">Make An Appointment</a></td>
+        <td *ngIf="adminFlag"><a class="btn btn-primary" routerLink="/viewadminappointments/{{s.testSlotId}}">View Appointments</a></td>
+    </tr>
+</table>
+</section>

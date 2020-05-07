@@ -1,0 +1,96 @@
+<body data-spy="scroll" data-target="#navbarResponsive">
+  <nav class="navbar navbar-expand-md  bg-white fixed-top">
+    <div class="container-fluid p-2" >
+      <a class="navbar-brand icon" href="#"><img src="../assets/icon1.png" ></a>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item" *ngIf="!loginFlag"><a class="nav-link" routerLink="home">Home</a></li>
+          <li class="nav-item" *ngIf="!loginFlag"><a class="nav-link" routerLink="/diagnosis">Centers</a></li>
+          <li class="nav-item" *ngIf="!loginFlag"><a class="nav-link" routerLink="/tests">Tests</a></li>
+          <li class="nav-item" *ngIf="!loginFlag"><a class="nav-link" routerLink="/appointment">Appointment</a></li>
+          <li class="nav-item" *ngIf="!loginFlag"><a class="nav-link" routerLink="contact">About Us</a></li>
+          <li class="nav-item" *ngIf="!loginFlag"><a class="nav-link" (click)="doLogOut()">Log Out</a></li>
+
+
+          <li class="nav-item" *ngIf="loginFlag"><a class="nav-link" (click)="showLogin()">Home</a></li>
+          <li class="nav-item" *ngIf="loginFlag"><a class="nav-link" (click)="showLogin()">Centers</a></li>
+          <li class="nav-item" *ngIf="loginFlag"><a class="nav-link" (click)="showLogin()">Tests</a></li>
+          <li class="nav-item" *ngIf="loginFlag"><a class="nav-link" (click)="showLogin()">Appointment</a></li>
+          <li class="nav-item" *ngIf="loginFlag"><a class="nav-link" (click)="showLogin()">About Us</a></li>
+          <li class="nav-item" *ngIf="loginFlag"><a class="nav-link" (click)="showLogin()">Login</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</body>
+
+<section style="min-height: 550px;" class="container-fluid bg col-md-12" *ngIf="showLoginFlag ">
+  <div class="centered">OUR DEDICATION IS WHAT </div>
+  <div class="centered2">YOU CAN TRUST </div>
+</section>
+
+<section *ngIf="modalflag">
+  <div class="login-box">
+    <img src="../assets/login.png" alt="">
+    <div class="alert alert-danger" *ngIf="errorMsg!=undefined">{{errorMsg}}</div>
+
+    <h2 class="text-center">Login Credentials</h2>
+    <form #frm="ngForm" (ngSubmit)="doLogin()">
+
+      <input type="text" placeholder="User ID" name="txtid" [(ngModel)]="login.uname" required #bkid="ngModel"
+        class="form-control" />
+      <div class="alert alert-danger" *ngIf="bkid.invalid && bkid.touched">User ID is required</div>
+      <input type="password" placeholder="Password" name="txtpwd" [(ngModel)]="login.pwd" required #bkpwd="ngModel"
+        class="form-control" />
+      <div class="alert alert-danger" *ngIf="bkpwd.invalid && bkpwd.touched">Password is required</div>
+      <div class="mt-2 text-center p-2"><input type="submit" value="Login" [disabled]="!frm.valid"
+          class="btn btn-success" /></div>
+    </form>
+  </div>
+
+
+</section>
+
+<section *ngIf="!showLoginFlag" style="padding-top: 60px;">
+  <router-outlet></router-outlet>
+</section>
+
+
+<footer class="page-footer font-small blue fixed" style="background-color: cadetblue;">
+  <div class="container-fluid padding ">
+    <div class="row text-center">
+      <div class="col-md-4">
+        <a class="footericon nav-link" href="#"><img src="../assets/icon.png">HealthCareServices</a>
+        <hr class="light">
+        <p>teamv4@hcs.co.in</p>
+        <p>16-99 Building,SaiNagar</p>
+        <p>Hyderabad ,Telangana, 0989879</p>
+        <p>contact:1800 274 0615</p>
+      </div>
+      <div class="col-md-4">
+        <hr class="light">
+        <h5>Find Us</h5>
+        <hr class="light">
+        <p>Linkedin</p>
+        <p>FaceBook</p>
+        <p>Twitter</p>
+        <p>Instagram</p>
+      </div>
+      <div class="col-md-4">
+        <hr class="light">
+        <h5>Our Service Areas</h5>
+        <hr class="light">
+        <p>Vijayawada ,Andra Pradesh, 444125</p>
+        <p>Khammam ,Telangana, 876509</p>
+        <p>Hyderabad ,Telangana, 0989879</p>
+      </div>
+      <hr class="light-100">
+      <div class="col-12">© 2020 Copyright:
+        <a href="https://www.healthline.com/nutrition/27-health-and-nutrition-tips#section4"> HealthCareManagement</a>
+      </div>
+    </div>
+  </div>
+  <!--<div class="footer-copyright text-center py-3">© 2020 Copyright:
+    <a href="https://www.healthline.com/nutrition/27-health-and-nutrition-tips#section4"> HealthCareManagement</a>
+  </div>-->
+</footer>

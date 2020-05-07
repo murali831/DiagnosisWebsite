@@ -1,0 +1,24 @@
+<section class="col-md-4 mx-auto mt-4" style="min-height: 550px;">
+    <h2 class="text-center">Add Test For Diagnosis Centre</h2>
+
+    <div class="alert alert-success" *ngIf="msg != undefined">{{msg}}</div>
+    <div class="alert alert-danger" *ngIf="errorMsg != undefined">{{errorMsg}}</div>
+
+    <form #frm="ngForm" (ngSubmit)="addTestForCentre()">
+        <div>Available Diagnosis Centre</div>
+        <div> <select [(ngModel)]="centreId" name="user" #mldept="ngModel" required class="form-control">
+           <option value="">--select dept--</option>
+           <option *ngFor="let c of centres" value="{{c.centreId}}">{{c.centreId}}</option>
+  </select></div>
+        <div class="alert alert-danger" *ngIf="mldept.invalid && mldept.touched">Centre Code is required</div>
+
+
+        <div>Available Tests</div>
+        <div> <select [(ngModel)]="testId" name="test" #mldept="ngModel" required class="form-control">
+           <option value="">--select dept--</option>
+           <option *ngFor="let t of tests" value="{{t.testId}}">{{t.testId}}</option>
+  </select></div>
+        <div class="alert alert-danger" *ngIf="mldept.invalid && mldept.touched">Test is required</div>
+
+        <div class="mt-2 text-center"><input type="submit" value="Add Tests For Diagnosis Centre" [disabled]="!frm.valid" class="btn btn-danger" />
+        </div>

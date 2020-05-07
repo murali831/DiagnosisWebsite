@@ -1,0 +1,18 @@
+<section class="col-md-4 mx-auto" style="min-height: 650px;">
+    <h2 class="text-center">Add Slot</h2>
+
+    <div class="alert alert-success" *ngIf="msg != undefined">{{msg}}</div>
+    <div class="alert alert-danger" *ngIf="errorMsg != undefined">{{errorMsg}}</div>
+
+    <form #slotfrm="ngForm" (ngSubmit)="addSlot()">
+        <div>Slot Date</div>
+        <div><input type="date" name="eid" [(ngModel)]="sform.slotDate" required #modeleid="ngModel" class="form-control"></div>
+        <div class="alert alert-danger" *ngIf="modeleid.invalid && modeleid.touched">Slot Date is required</div>
+
+        <div>No Of Appoinments</div>
+        <div><input type="text" name="apmts" [(ngModel)]="sform.noOfApmts" required #mlename="ngModel" class="form-control" /></div>
+        <div class="alert alert-danger" *ngIf="mlename.invalid && mlename.touched">Appointment is required</div>
+        <div class="mt-2 text-center"><input type="submit" value="Add Slot" [disabled]="!slotfrm.valid" class="btn btn-danger" />
+        </div>
+    </form>
+</section>

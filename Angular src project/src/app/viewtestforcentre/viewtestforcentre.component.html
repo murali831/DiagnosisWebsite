@@ -1,0 +1,35 @@
+<section class="bg bg-light col-md-12 mx-auto">
+  <h2 class="text-center mt-3">List Of Checkup</h2>
+  <div class="text-center">
+    <div>Centre ID: {{centre.centreId}}</div>
+    <div>Centre Name: {{centre.centreName}}</div>
+ </div>
+<div class="text-center">
+    <div>Centre Address: {{centre.address}}</div>
+    <div> City: {{centre.city}}</div>
+ </div>
+<div class="text-center">
+    <div>Contact Number: {{centre.contact}}</div>
+    
+ </div>
+
+  <table class="table table-primary table-striped table-hover col-md-10 m-2 mx-auto" >
+  <tr>
+      <th>Test ID</th>
+      <th>Test Name</th>
+      <th>Amount</th>
+      <th>View slots</th>
+      <th *ngIf="adminFlag">Edit</th>
+
+  </tr>
+  <tr *ngFor ="let t of tests">
+    <td>{{t.checkup.testId}}</td>
+    <td>{{t.checkup.testName | titlecase}}</td>
+    <td>{{t.checkup.amount | currency:'INR'}}</td>
+     <td><a class="btn btn-primary" routerLink="/viewslots/{{t.checkup.testId}}/{{centre.centreId}}" >view Slots</a></td>
+     <td *ngIf="adminFlag"><a class="btn btn-primary mx-auto" routerLink="/addslot/{{t.diagnosisTestId}}" >Add Slot</a></td>
+    </tr>
+    
+</table>
+</section>
+

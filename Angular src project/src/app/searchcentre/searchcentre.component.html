@@ -1,0 +1,25 @@
+<section class="col-md-12 mx-auto" style=" min-height: 600px;" >
+
+        <h2 class="text-center p-4">Search by Test</h2>
+        <section class="col-md-4 mx-auto ">
+            <input type="text" class="p-2 ml-3" [(ngModel)]="testName"/>
+            <input type="button" class="p-2 btn btn-primary ml-3" (click)="searchTest(testName)"   value="Search Test" />
+          </section>
+    <div class="text-center alert alert-danger" *ngIf="errorMsg !=undefined">{{errorMsg}}</div>
+    <table class="table table-primary table-striped table-hover col-md-10 mx-auto mt-3 ">
+        <tr>
+            <th>Image</th>
+            <th>Test ID</th>
+            <th>Test Name</th>
+            <th>Amount</th>
+            <th>Centre's</th>
+        </tr>
+        <tr *ngFor="let t of tests ">
+            <td><img src="assets/img/{{t.checkup.testId}}.jpg " height="200 " width="250 " /></td>
+            <td>{{t.checkup.testId}}</td>
+            <td>{{t.checkup.testName | titlecase}}</td>
+            <td>{{t.checkup.amount}}</td>
+            <td><a class="btn btn-primary " routerLink="/viewdiagnosis/{{t.checkup.testId}} ">View Centers</a></td>
+        </tr>
+    </table>
+</section> 

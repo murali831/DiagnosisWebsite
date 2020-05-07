@@ -1,0 +1,24 @@
+ <section class="col-md-4 mx-auto mt-4">
+  <h2 class="text-center">Make Appointment</h2>
+  <div class="alert alert-success" *ngIf="msg!= undefined">{{msg}}</div>
+  <div class="alert alert-danger" *ngIf="errorMsg != undefined">{{errorMsg}}</div>
+  <form #appmtfrm="ngForm" (ngSubmit)="makeAppointment()" novalidate>
+    <div>Patient Name</div>
+    <div><input type="text" name="ename" [(ngModel)]="aform.patientName" #mlename="ngModel" class="form-control" required pattern="[a-zA-Z\s]{3,24}"/></div>
+    <div class="alert alert-danger" *ngIf="mlename.errors && (mlename.dirty || mlename.touched)">
+      <div *ngIf="mlename.errors.required">Patient Name  is required</div>
+      <div *ngIf="mlename.errors.pattern">Patient Name must not exceed more than 25 characters and min 3 characters</div>
+    </div>  
+
+    <div>Patient Contact Number</div>
+    <div><input type="number" name="enum" [(ngModel)]="aform.contactNo" #mlenum="ngModel" class="form-control" required pattern="[0-9]{10}"/></div>
+    <div *ngIf="mlenum.errors && (mlenum.dirty || mlenum.touched)" class="alert alert-danger">
+      <div [hidden]="!mlenum.errors.required">Contact is required</div>
+      <div [hidden]="!mlenum.errors.pattern">Contact should be 10 digits</div>
+    </div>
+    <div class="mt-2 text-center"><input type="submit" value="Make Appointment" [disabled]="!appmtfrm.form.valid" class="btn btn-danger"/>
+    </div>
+</form>
+</section>
+
+
